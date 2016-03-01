@@ -19,7 +19,14 @@
  		echo "文件名：".$_FILES["file"]["name"]."<br>";
  		echo "文件类型：".$_FILES["file"]["type"]."<br>";
  		echo "文件大小：".round(($_FILES["file"]["size"]/1024),2)."Kb<br>";
- 		echo "文件存储：".$_FILES["file"]["tmp_name"];
+ 		echo "文件临时存储：".$_FILES["file"]["tmp_name"]."<br>";
+ 		if(file_exists("upload/".$_FILES["file"]["name"])){
+ 			echo $_FILES["file"]["name"]."已经存在";
+ 		}
+ 		else{
+ 			move_uploaded_file($_FILES["file"]["tmp_name"],"upload/".$_FILES["file"]["name"]);
+ 			echo "文件位置："."upload/".$_FILES["file"]["name"];
+ 		}
  	}
  }
  else{
