@@ -127,4 +127,44 @@ echo "<br>";
 //array_uintersect返回交集
 //Array ( [a] => red [b] => green )
 print_r(array_uintersect($a_a,$re1,"myFilter"));
+echo "<br>";
+//array_unique移除重复值
+//Array ( [0] => we [2] => ok )
+print_r(array_unique($sort_c));
+echo "<br>";
+//array_walk自定义函数
+function walk($value,$key){
+	echo "键名:".$key.",键值:".$value." ";
+}
+array_walk($splice1,"walk");
+echo "<br>";
+//compact创建变量名和值的数组
+$firstName = "hello";
+$secondName = "php";
+$profession = "teacher";
+//Array ( [firstName] => hello [secondName] => php [profession] => teacher )
+print_r(compact("firstName","secondName","profession"));
+echo "<br>";
+$theName = array("firstName","secondName");
+//Array ( [firstName] => hello [secondName] => php [profession] => teacher )
+print_r(compact($theName,"location","profession"));
+echo "<br>";
+$aaa = "original";
+$people = array("aaa"=>"HELLO","bbb"=>"PHP","ccc"=>"ARRAY");
+reset($people);
+while(list($key,$val)= each($people)){
+	//aaa=>HELLO bbb=>PHP ccc=>ARRAY
+	echo "$key=>$val ";
+}
+
+echo "<br>";
+//extract从数组将变量导入当前符号表
+extract($people,EXTR_PREFIX_SAME,"P");
+//$aaa=original; $bbb=PHP; $ccc=ARRAY; $P_aaa= HELLO
+echo "\$aaa=$aaa; \$bbb=$bbb; \$ccc=$ccc; \$P_aaa= $P_aaa";
+//key()元素键名位置
+echo "<br>";
+reset($people);
+//next($people);
+echo "position: ".key($people);
 ?>
