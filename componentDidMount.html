@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>componentDidMount 例子</title>
+	<script src="js/react.min.js"></script>
+	<script src="js/react-dom.min.js"></script>
+	<script src="js/browser.min.js"></script>
+</head>
+<body>
+	<div id="example"></div>
+	<script type="text/babel">
+	{/*componentDidMount : 在第一次渲染后调用，只在客户端。*/}
+		var Hello = React.createClass({
+			getInitialState:function(){
+				return {
+					opacity:1.0
+				}
+			},
+			componentDidMount:function(){
+				this.timer = setInterval(function(){
+					var opacity= this.state.opacity;
+					opacity -= 0.05;
+					if(opacity < 0.1)
+					   opacity = 1.0;
+					this.setState({
+						opacity:opacity
+					});   
+				}.bind(this),100);
+			},
+			render:function(){
+				return (
+					<div style={{opacity:this.state.opacity}}>
+						hello {this.props.name}
+					</div>
+				);
+			}
+		});
+
+		ReactDOM.render(<Hello name="React" />,document.getElementById("example"));
+	</script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>React 表单输入</title>
+	<script src="js/react.min.js"></script>
+	<script src="js/react-dom.min.js"></script>
+	<script src="js/browser.min.js"></script>
+</head>
+<body>
+	<div id="example"></div>
+	<script type="text/babel">
+		var InputShow = React.createClass({
+			getInitialState:function(){
+				return {value:"WHAT?"};
+			},
+			handleChange:function(event){
+				this.setState({value:event.target.value});
+			},
+			render:function(){
+				var value = this.state.value;
+				return (
+					<div>
+						<input type="text" value={value} onChange={this.handleChange} />
+						<p>{value}</p>
+					</div>
+				);
+			}
+		});
+		ReactDOM.render(<InputShow />,document.getElementById("example"));
+	</script>
+</body>
+</html>

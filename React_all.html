@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>React组件生命周期方法使用</title>
+	<script src="js/react.min.js"></script>
+	<script src="js/react-dom.min.js"></script>
+	<script src="js/browser.min.js"></script>
+</head>
+<body>
+	<div id="example"></div>
+	<script type="text/babel">
+		var Button = React.createClass({
+			getInitialState:function(){
+				return {
+					data:0
+				}
+			},
+			setNewNumber:function(){
+				this.setState({data:this.state.data+1});
+			},
+			render:function(){
+				return (
+					<div>
+						<button onClick={this.setNewNumber}>加1</button>
+						<Content theNum = {this.state.data}></Content>
+					</div>
+				);
+			}
+		});
+		var Content = React.createClass({
+			componentWillMount:function(){
+				console.log("Component will mount!");
+			},
+			componentDidMount:function(){
+				console.log("Component did mount!");
+			},
+			componentWillReceiveProps:function(newProps){
+				console.log("Component will receive props!");
+			},
+			shouldComponentUpdate:function(newProps,newState){
+				return true;
+			},
+			componentWillUpdate:function(){
+				console.log("Component will update");
+			},
+			componentDidUpdate:function(){
+				console.log("Component did update");
+			},
+			componentWillUnmount:function(){
+				console.log("Component will unmount");
+			},
+			render:function(){
+				return (
+					<div>
+						<h3>{this.props.theNum}</h3>
+					</div>
+				);
+			}
+		});
+		ReactDOM.render(<Button />,document.getElementById("example"));
+	</script>
+</body>
+</html>
